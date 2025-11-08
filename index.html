@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 21st Birthday My Love! 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #FFE4E9 0%, #FFC0D3 25%, #FFB3C6 50%, #FFA6C1 75%, #FF99BA 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hearts-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 25px;
+            animation: float 8s infinite;
+            opacity: 0.7;
+            filter: drop-shadow(0 0 10px rgba(255, 105, 180, 0.8));
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+            50% { transform: translateY(-50px) rotate(20deg); opacity: 1; }
+        }
+
+        /* COVER PAGE */
+        #coverPage {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .cover-content {
+            background: rgba(255, 240, 245, 0.98);
+            border: 5px solid #FF69B4;
+            border-radius: 30px;
+            padding: 60px 40px;
+            max-width: 700px;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(255, 182, 193, 0.8);
+            animation: coverPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes coverPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .cover-title {
+            color: #FF1493;
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(255, 182, 193, 0.8);
+        }
+
+        .cover-subtitle {
+            color: #FF69B4;
+            font-size: 1.5em;
+            margin: 20px 0;
+            font-style: italic;
+        }
+
+        .question-box {
+            background: rgba(255, 240, 250, 0.95);
+            border: 3px solid #FF69B4;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            display: none;
+        }
+
+        .question-box.active {
+            display: block;
+            animation: questionSlide 0.5s ease-out;
+        }
+
+        @keyframes questionSlide {
+            from { transform: translateX(-100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .question-text {
+            color: #C71585;
+            font-size: 1.3em;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .answer-btn {
+            background: linear-gradient(135deg, #FFB6C1, #FFC0CB);
+            color: #C71585;
+            border: 3px solid #FF69B4;
+            padding: 15px 35px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(255, 182, 193, 0.5);
+            font-weight: bold;
+        }
+
+        .answer-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 40px rgba(255, 182, 193, 0.8);
+        }
+
+        .wrong-answer {
+            background: linear-gradient(135deg, #FFC0D3, #FFE4E9);
+        }
+
+        /* MAIN CONTENT */
+        #mainContent {
+            display: none;
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section {
+            background: rgba(255, 240, 245, 0.95);
+            border: 4px solid #FF69B4;
+            border-radius: 30px;
+            padding: 50px 40px;
+            margin: 40px 0;
+            box-shadow: 0 0 40px rgba(255, 182, 193, 0.5);
+        }
+
+        h1, h2 {
+            color: #FF1493;
+            text-align: center;
+            text-shadow: 0 0 20px rgba(255, 182, 193, 0.8);
+            margin-bottom: 30px;
+        }
+
+        h1 { font-size: 3em; }
+        h2 { font-size: 2.3em; }
+
+        .subtitle {
+            color: #FF69B4;
+            font-size: 1.3em;
+            text-align: center;
+            font-style: italic;
+            margin: 20px 0;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .photo-card {
+            background: linear-gradient(135deg, rgba(255, 192, 203, 0.9), rgba(255, 182, 193, 0.9));
+            border: 4px solid #FF69B4;
+            border-radius: 25px;
+            padding: 20px;
+            transition: all 0.4s;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.4);
+        }
+
+        .photo-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 50px rgba(255, 182, 193, 0.7);
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 350px;
+            background: linear-gradient(135deg, #FFB6C1, #FFC0CB);
+            border: 3px dashed #FF69B4;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: #FF1493;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+        }
+
+        .photo-number {
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+
+        .photo-caption {
+            color: #C71585;
+            font-size: 1.2em;
+            text-align: center;
+            font-weight: bold;
+            line-height: 1.6;
+        }
+
+        .reason-item {
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.8), rgba(255, 192, 203, 0.8));
+            border-left: 6px solid #FF1493;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.4s;
+            color: #C71585;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .reason-item:hover {
+            transform: translateX(20px) scale(1.02);
+            background: linear-gradient(135deg, #FFB6C1, #FFC0CB);
+        }
+
+        .interactive-button {
+            background: linear-gradient(135deg, #FFB6C1, #FFC0CB);
+            color: #C71585;
+            border: 3px solid #FF69B4;
+            padding: 20px 50px;
+            font-size: 1.3em;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 15px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(255, 182, 193, 0.5);
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .interactive-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 40px rgba(255, 182, 193, 0.8);
+        }
+
+        .special-message {
+            background: linear-gradient(135deg, #FFB6C1, #FFC0CB);
+            padding: 50px;
+            border-radius: 25px;
+            margin: 40px 0;
+            text-align: center;
+            border: 4px solid #FF69B4;
+            box-shadow: 0 0 50px rgba(255, 182, 193, 0.5);
+        }
+
+        .special-message p {
+            color: #C71585;
+            font-size: 1.3em;
+            line-height: 2;
+            margin: 20px 0;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 240, 245, 0.98);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #FFB6C1, #FFC0CB);
+            border: 5px solid #FF69B4;
+            padding: 60px;
+            border-radius: 30px;
+            text-align: center;
+            max-width: 700px;
+            box-shadow: 0 0 60px rgba(255, 182, 193, 0.8);
+        }
+
+        .disappointment-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 240, 245, 0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .disappointment-content {
+            background: linear-gradient(135deg, #FFE4E9, #FFC0D3);
+            border: 5px solid #FF69B4;
+            padding: 50px;
+            border-radius: 30px;
+            text-align: center;
+            max-width: 600px;
+            box-shadow: 0 0 60px rgba(255, 105, 180, 0.6);
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .disappointment-content h2 {
+            font-size: 2.5em;
+            color: #FF1493;
+            margin-bottom: 30px;
+        }
+
+        .disappointment-content p {
+            font-size: 1.4em;
+            color: #C71585;
+            line-height: 2;
+            margin: 20px 0;
+        }
+
+        .close-modal {
+            background: linear-gradient(135deg, #FFB6C1, #FFC0CB);
+            color: #C71585;
+            border: 3px solid #FF69B4;
+            padding: 15px 40px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-top: 30px;
+            font-weight: bold;
+        }
+
+        .text-pink {
+            color: #C71585;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .counter-display {
+            font-size: 4em;
+            color: #FF1493;
+            font-weight: bold;
+            margin: 30px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts-bg" id="heartsContainer"></div>
+
+    <!-- Audio Player (Hidden - Auto-plays on load) -->
+    <!-- INSTRUCTIONS: Place your birthday song file in the same folder as this HTML file -->
+    <!-- Name it "birthday_song.mp3" or update the src path below to match your file name -->
+    <audio id="backgroundMusic" loop>
+        <source src="Song.mp3" type="audio/mpeg">
+        <source src="birthday_song.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- COVER PAGE -->
+    <div id="coverPage">
+        <div class="cover-content">
+            <h1 class="cover-title">🎉 HAPPY 21ST BIRTHDAY! 🎉</h1>
+            <p class="cover-subtitle">To the Most Amazing Girl in the Universe! 💖</p>
+            
+            <div class="question-box active" id="question1">
+                <p class="question-text">
+                    Before we begin this magical journey...<br><br>
+                    <strong>Question 1:</strong><br>
+                    Do you promise to smile throughout this entire website?
+                </p>
+                <button class="answer-btn wrong-answer" onclick="wrongAnswer(1)">Maybe Later? 😅</button>
+                <button class="answer-btn" onclick="nextQuestion(2)">YES! I Promise! 💕</button>
+            </div>
+
+            <div class="question-box" id="question2">
+                <p class="question-text">
+                    Awesome! Now...<br><br>
+                    <strong>Question 2:</strong><br>
+                    Who is the luckiest guy in the world to have you? 🤔
+                </p>
+                <button class="answer-btn wrong-answer" onclick="wrongAnswer(2)">Some Random Guy 🤷</button>
+                <button class="answer-btn" onclick="nextQuestion(3)">YOU! Obviously! 😘</button>
+            </div>
+
+            <div class="question-box" id="question3">
+                <p class="question-text">
+                    Haha! Correct! 😄<br><br>
+                    <strong>Final Question:</strong><br>
+                    Are you ready to see how much I love you?
+                </p>
+                <button class="answer-btn wrong-answer" onclick="wrongAnswer(3)">Not Really... 😬</button>
+                <button class="answer-btn" onclick="enterMainSite()">LET'S GO! 🎉</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="mainContent">
+        <div class="container">
+            <div class="section">
+                <h1>💕 OUR BEAUTIFUL LOVE STORY 💕</h1>
+                <p class="subtitle">From December 26, 2023 to Forever ✨</p>
+                <p class="subtitle">Officially Yours Since January 16, 2024 💖</p>
+            </div>
+
+            <div class="section">
+                <h2>The Birthday Queen Turns 21! 👑</h2>
+                <p class="subtitle">November 10, 2024 - Your Special Day!</p>
+                <img src="1.jpeg" alt="Photo description" style="width: 100%; height: 350px; object-fit: cover; border-radius: 15px;">
+                <p class="text-pink text-center" style="font-size: 1.3em;">
+                    Every time I look at you, I fall in love all over again! 💖
+                </p>
+            </div>
+
+            <div class="section text-center">
+                <h2>Our Love Journey 💖</h2>
+                <p class="subtitle">Days Since We Became Official (Jan 16, 2024):</p>
+                <div class="counter-display" id="dayCounter">0</div>
+                <p class="subtitle">Days of Pure Happiness! ✨</p>
+                <button class="interactive-button" onclick="incrementCounter()">Add More Love! 💗</button>
+            </div>
+
+            <div class="section">
+                <h2>Why You Mean Everything to Me 💘</h2>
+                <div class="reason-item">
+                    <strong>🌟 Your Smile:</strong> That smile lights up my entire universe! Every time you smile, my heart skips a beat!
+                </div>
+                <div class="reason-item">
+                    <strong>😂 Your Laugh:</strong> Your laugh is my favorite sound in the whole world! It's pure magic!
+                </div>
+                <div class="reason-item">
+                    <strong>💪 Your Strength:</strong> You're so incredibly strong and inspiring! Watching you chase your dreams motivates me!
+                </div>
+                <div class="reason-item">
+                    <strong>❤️ Your Heart:</strong> You have the most beautiful soul! Your kindness and compassion are extraordinary!
+                </div>
+                <div class="reason-item">
+                    <strong>✨ Your Everything:</strong> Everything about you is perfect! From your cute habits to your dreams - I love it ALL!
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Our Precious Memories 📷</h2>
+                <div class="photo-grid">
+                    <div class="photo-card" onclick="celebratePhoto()">
+                        <img src="22.jpg" alt="Spark" style="width: 100%; height: 350px; object-fit: cover; border-radius: 15px;">
+                        <p class="photo-caption">Sparkplug of Our Love </p>
+                    </div>
+
+                    <div class="photo-card" onclick="celebratePhoto()">
+                        <img src="2.jpg" alt="Our First Photo" style="width: 100%; height: 350px; object-fit: cover; border-radius: 15px;">
+                        <p class="photo-caption">Our First Photo Together! 💕</p>
+                    </div>
+
+                    <div class="photo-card" onclick="celebratePhoto()">
+                        <img src="3.jpeg" alt="Buns" style="width: 100%; height: 350px; object-fit: cover; border-radius: 15px;">
+                        <p class="photo-caption">My Favorite Buns! 🌟</p>
+                    </div>
+
+                    <div class="photo-card" onclick="celebratePhoto()">
+                        <img src="4.jpg" alt="Memories" style="width: 100%; height: 350px; object-fit: cover; border-radius: 15px;">
+                        <p class="photo-caption">Making Memories! 💖</p>
+                    </div>
+
+                    <div class="photo-card" onclick="celebratePhoto()">
+                        <img src="5.jpg" alt="Sweet" style="width: 100%; height: 350px; object-fit: cover; border-radius: 15px;">
+                        <p class="photo-caption">My Favorite Sweet</p>
+                    </div>
+
+                    <div class="photo-card" onclick="celebratePhoto()">
+                        <img src="6.jpg" alt="Moments" style="width: 100%; height: 350px; object-fit: cover; border-radius: 15px;">
+                        <p class="photo-caption">Beautiful Moments! ✨</p>
+                    </div>
+
+                    <div class="photo-card" onclick="celebratePhoto()">
+                        <img src="7.jpg" alt="Us" style="width: 100%; height: 350px; object-fit: cover; border-radius: 15px;">
+                        <p class="photo-caption">Us Always 💕</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="special-message">
+                <h2 style="color: #FF1493; margin-top: 0;">For My Beautiful Birthday Girl 💖</h2>
+                <p>Happy 21st Birthday, my love! 🎉🎂</p>
+                <p>You are the most incredible person I've ever met! From that nervous day on December 26, 2023 when I gave you that note, to January 16, 2024 when we became official, to every single moment since - it's all been magical!</p>
+                <p>You make me laugh, you inspire me, you support me, and most importantly - you make me feel like the luckiest person alive!</p>
+                <p style="font-size: 1.6em; color: #FF1493; font-weight: bold;">
+                    I LOVE YOU MORE THAN WORDS CAN SAY! 💖✨🌟
+                </p>
+                <p>Here's to 21 years of you being amazing, and a lifetime more of us together! 🥂</p>
+                <button class="interactive-button" onclick="showFamilyDream()">
+                    💝 Our Future Together 💝
+                </button>
+            </div>
+
+            <!-- Family Dream Section -->
+            <div class="section" id="familyDreamSection" style="display: none;">
+                <h2 style="color: #FF1493;">My Heart's Deepest Dream 💕</h2>
+                <div class="special-message" style="margin: 30px 0;">
+                    <p style="font-size: 1.4em; line-height: 2.2;">
+                        Every time I look at you, I don't just see my present... I see our future. 🌅
+                    </p>
+                    <p style="font-size: 1.3em; line-height: 2.2;">
+                        I dream of the day when we build our own little family together. A home filled with love, laughter, and endless happiness. 🏡💕
+                    </p>
+                </div>
+
+                <!-- Our Future Family Image Section -->
+                <div style="margin: 50px 0; text-align: center;">
+                    <h2 style="color: #FF1493; font-size: 2em; margin-bottom: 30px;">Our Beautiful Future 👨‍👩‍👧</h2>
+                    <div style="max-width: 600px; margin: 0 auto;">
+                        <div class="photo-card" onclick="celebratePhoto()" style="cursor: pointer;">
+                            <img src="8.JPG" alt="Our Future Daughter" style="width: 100%; height: 450px; object-fit: cover; border-radius: 15px;">
+                            <p class="photo-caption" style="font-size: 1.4em;">Our Daughter With Your Beautiful Smile 😊✨</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="special-message" style="margin: 30px 0; text-align: center;">
+                    <p style="font-size: 1.4em; line-height: 2.2; color: #FF1493; font-weight: bold;">
+                        I imagine a little daughter with your beautiful smile... 👶✨
+                    </p>
+                    <p style="font-size: 1.3em; line-height: 2.2;">
+                        The same smile that made me fall in love with you. The same warmth that lights up every room you walk into. The same joy that fills my heart every single day. 😊💗
+                    </p>
+                    <p style="font-size: 1.3em; line-height: 2.2;">
+                        I want to hold your hand through every step of life's journey. I want to wake up next to you for the rest of my days. I want to build dreams together, raise a family together, and grow old together. 👨‍👩‍👧💑
+                    </p>
+                    <p style="font-size: 1.5em; line-height: 2.2; color: #C71585; font-weight: bold;">
+                        Because you're not just my love... you're my home, my future, and the mother of the family I dream about. 🏠💖
+                    </p>
+                    <p style="font-size: 1.4em; line-height: 2.2;">
+                        Every moment with you makes me more certain that you're the one I want to spend forever with. The one I want to create a lifetime of memories with. The one I want to call the mother of my children. 👪✨
+                    </p>
+                    <p style="font-size: 1.6em; color: #FF1493; font-weight: bold; margin-top: 40px;">
+                        Will you build this beautiful future with me? 💍💕
+                    </p>
+                </div>
+                <button class="interactive-button" onclick="showFinalSurprise()">
+                    💝 One More Surprise! 💝
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Final Surprise Modal -->
+    <div class="modal" id="surpriseModal">
+        <div class="modal-content">
+            <h2 style="color: #FF1493; font-size: 2.5em;">💕 Happy 21st Birthday! 💕</h2>
+            <p style="font-size: 1.3em; color: #C71585; margin: 30px 0; line-height: 2;">
+                Thank you for saying YES that day! 🥰<br><br>
+                Thank you for every smile, every laugh, every adventure, and every moment together!<br><br>
+                You're not just my girlfriend - you're my best friend, my partner in crime, my inspiration, and my future! 💖<br><br>
+                <strong style="font-size: 1.2em; color: #FF1493;">Forever yours! 💕✨</strong>
+            </p>
+            <p style="font-size: 2.5em; margin: 20px 0;">🎂🎉💖🌟✨😍💕🥰💗🎊</p>
+            <button class="close-modal" onclick="closeSurprise()">Close (But I'll never stop loving you!)</button>
+        </div>
+    </div>
+
+    <!-- Disappointment Modal -->
+    <div class="disappointment-modal" id="disappointmentModal">
+        <div class="disappointment-content">
+            <h2 id="disappointmentTitle">🥺</h2>
+            <p id="disappointmentMessage"></p>
+            <button class="close-modal" onclick="closeDisappointment()">Okay, I'll click the right one! 💕</button>
+        </div>
+    </div>
+
+    <script>
+        // Auto-play background music when page loads
+        window.addEventListener('load', function() {
+            const music = document.getElementById('backgroundMusic');
+            // Try to play music automatically
+            music.play().catch(function(error) {
+                // If autoplay is blocked, it will play when user interacts with page
+                console.log('Autoplay prevented. Music will play on first interaction.');
+                // Add one-time click listener to start music on first user interaction
+                document.body.addEventListener('click', function() {
+                    music.play();
+                }, { once: true });
+            });
+        });
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            const hearts = ['❤️', '💕', '💖', '💗', '💓', '💘'];
+            heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 4 + 4) + 's';
+            heart.style.top = Math.random() * 100 + '%';
+            document.getElementById('heartsContainer').appendChild(heart);
+            setTimeout(() => heart.remove(), 8000);
+        }
+
+        setInterval(createHeart, 600);
+
+        function nextQuestion(questionNum) {
+            document.querySelectorAll('.question-box').forEach(box => {
+                box.classList.remove('active');
+            });
+            document.getElementById('question' + questionNum).classList.add('active');
+            for(let i = 0; i < 20; i++) {
+                setTimeout(createHeart, i * 50);
+            }
+        }
+
+        function wrongAnswer(questionNum) {
+            const messages = {
+                1: {
+                    title: "🥺 Oh No...",
+                    text: "Aww, that breaks my heart! Please promise me you'll smile? It would mean the world to me! Click the right answer, my love! 💕"
+                },
+                2: {
+                    title: "😢 That Hurts...",
+                    text: "No no no! That's not right! I'M the lucky one! Please click the correct answer - you know it's true! 💖"
+                },
+                3: {
+                    title: "💔 Please Don't Say That...",
+                    text: "Oh no! Don't say that! I need you to see this! Please click 'LET'S GO!' - I promise it'll make you smile! 🥰"
+                }
+            };
+            
+            document.getElementById('disappointmentTitle').textContent = messages[questionNum].title;
+            document.getElementById('disappointmentMessage').textContent = messages[questionNum].text;
+            document.getElementById('disappointmentModal').style.display = 'flex';
+            
+            for(let i = 0; i < 15; i++) {
+                setTimeout(createHeart, i * 50);
+            }
+        }
+
+        function closeDisappointment() {
+            document.getElementById('disappointmentModal').style.display = 'none';
+        }
+
+        function enterMainSite() {
+            for(let i = 0; i < 100; i++) {
+                setTimeout(createHeart, i * 30);
+            }
+            setTimeout(() => {
+                document.getElementById('coverPage').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+                window.scrollTo(0, 0);
+            }, 1000);
+        }
+
+        function calculateDays() {
+            const startDate = new Date('2024-01-16');
+            const today = new Date();
+            const diffTime = Math.abs(today - startDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            return diffDays;
+        }
+
+        let days = calculateDays();
+        document.getElementById('dayCounter').textContent = days;
+
+        function incrementCounter() {
+            days += Math.floor(Math.random() * 10) + 1;
+            document.getElementById('dayCounter').textContent = days;
+            for(let i = 0; i < 40; i++) {
+                setTimeout(createHeart, i * 40);
+            }
+        }
+
+        function celebratePhoto() {
+            for(let i = 0; i < 20; i++) {
+                setTimeout(createHeart, i * 50);
+            }
+        }
+
+        function showFinalSurprise() {
+            document.getElementById('surpriseModal').style.display = 'flex';
+            for(let i = 0; i < 150; i++) {
+                setTimeout(createHeart, i * 30);
+            }
+        }
+
+        function showFamilyDream() {
+            document.getElementById('familyDreamSection').style.display = 'block';
+            document.getElementById('familyDreamSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            for(let i = 0; i < 100; i++) {
+                setTimeout(createHeart, i * 40);
+            }
+        }
+
+        function closeSurprise() {
+            document.getElementById('surpriseModal').style.display = 'none';
+        }
+
+        for(let i = 0; i < 20; i++) {
+            createHeart();
+        }
+    </script>
+</body>
+</html>
